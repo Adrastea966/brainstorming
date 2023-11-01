@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
-function App() {
+const App = () => {
   const [ideas, setIdeas] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [warningMessage, setWarningMessage] = useState('');
@@ -10,38 +10,24 @@ function App() {
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
-    // Verificar si el input está vacío y mostrar el popup de advertencia
-    if (event.target.value.trim() === '') {
-      setWarningMessage('No se permiten ideas vacías.');
-      setShowWarning(true);
-    } else {
-      setShowWarning(false);
-    }
+    setShowWarning(false); 
   };
-
+  
   const handleInputKeyDown = (event) => {
     if (event.key === 'Enter') {
-      if (inputValue.trim().length > 0) {
-        if (inputValue.trim().length > 34) {
-          setWarningMessage('El texto no puede tener más de 34 caracteres.');
-          setShowWarning(true);
-          setTimeout(() => {
-            setShowWarning(false);
-          }, 3000);
-        } else {
-          addIdea();
-        }
-      } else {
+      if (inputValue.trim().length === 0) {
         setWarningMessage('No se permiten ideas vacías.');
         setShowWarning(true);
         setTimeout(() => {
           setShowWarning(false);
-        }, 3000);
+        }, 2000);
+      } else {
+        setShowWarning(false); 
+        addIdea();
       }
     }
   };
-
-
+  
   const addIdea = () => {
     if (inputValue.trim().length > 0 && inputValue.trim().length <= 34) {
       const truncatedText = inputValue.trim();
@@ -52,13 +38,13 @@ function App() {
       setShowWarning(true);
       setTimeout(() => {
         setShowWarning(false);
-      }, 3000);
+      }, 2000);
     } else {
       setWarningMessage('No se permiten ideas vacías.');
       setShowWarning(true);
       setTimeout(() => {
         setShowWarning(false);
-      }, 3000);
+      }, 2000);
     }
   };
 
@@ -117,6 +103,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
 export default App;
