@@ -66,6 +66,7 @@ const App = () => {
 
   return (
     <div className="App">
+     <img src="../../logo-twister.svg" alt="Logo" className="logo-twister" />
       <div className="idea-container">
         <div className='ideas-input'>
           <input
@@ -74,8 +75,9 @@ const App = () => {
             onChange={handleInputChange}
             onKeyDown={handleInputKeyDown}
             placeholder="Escribe tu idea..."
+            className='input-twister'
           />
-          <button onClick={addIdea}>Agregar Idea</button>
+          <button className='btn-agregar-idea' onClick={addIdea}>Agregar Idea</button>
         </div>
         <div className='ideas-items-contenedor'>
           {ideas.map((idea) => (
@@ -97,8 +99,8 @@ const App = () => {
         </div>
         {showWarning && <div className="warning-popup">{warningMessage}</div>}
         <div className='botones-contenedor'>
-          <button onClick={selectIdeas}>Seleccionar</button>
-          <button onClick={() => setIdeas([])}>Borrar todo</button>
+          <button className='btn-seleccionar' onClick={selectIdeas}>  <img src="../../image/mano.png" alt="Mano ilustracion" className="btn-seleccionar" /> Seleccionar</button>
+          <button className='btn-borrar-todo' onClick={() => setIdeas([])}> <img src="../../image/goma.png" alt="Goma ilustracion" className="btn-borrar-todo" /> Borrar todo</button>
         </div>
       </div>
     </div>

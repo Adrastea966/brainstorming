@@ -9,7 +9,9 @@
 
 body {
     overflow-x: hidden;
-    background-color: #fff;
+    background: url('/public/image/fondo.jpg') no-repeat;
+    background-size: cover;
+    min-height: 100vh;
 }
 
 html {
@@ -30,15 +32,57 @@ a {
 
 /*Estilos principales*/
 input {
-    margin-bottom: 10px;
     padding: 10px;
     font-size: 16px;
+}
+
+.input-twister{
+    background: transparent;
+    border: none; 
+    border-bottom: 2px solid #000;
+    outline: none; 
 }
 
 button {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+    background: transparent;
+    transition: background-position 0.3s ease-in-out;
+    background-size: 200% 100%;
+    background-image: linear-gradient(to right, #ffffff00 50%, #fff 50%);
+    
+}
+
+button:hover {
+    background-position: -100% 0; 
+}
+
+.btn-seleccionar{
+    display:flex;
+    align-items: center;
+    gap:1rem;
+}
+
+.btn-borrar-todo{
+    display:flex;
+    align-items: center;
+}
+
+.btn-seleccionar img{
+    width: 23px;
+}
+
+.btn-seleccionar:hover img{
+    transform: translateY(-5px);
+}
+
+.btn-borrar-todo img{
+    width: 40px;
+}
+
+.btn-borrar-todo:hover img{
+    transform: rotate(20deg);
 }
 
 li {
@@ -60,16 +104,22 @@ li {
     max-width: 600px;
     min-height: 400px;
     margin: 2%;
+    padding: 1%;
     background-color: #fff5bc;
-    border-radius: 20px;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
 }
 
+.logo-twister{
+    display: none;
+}
+
 .ideas-input {
     padding: 3%;
+    display:flex;
+    gap:2rem;
 }
 
 .ideas-items-contenedor {
@@ -182,4 +232,34 @@ li {
     border: 1px solid #ff4444;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 999;
+}
+
+/*Media querys*/
+@media screen and (max-width: 900px) {
+
+    .logo-twister {
+        display:block;
+        width: 250px;
+        height: auto;
+        position: absolute;
+        top: -20px;
+    }
+
+    body {
+        overflow-x: hidden;
+        background: url('/public/image/fondo2.jpg') no-repeat;
+        background-size: cover;
+        min-height: 100vh;
+    }
+
+    .idea-container {
+        margin-top: 15%;
+    }
+}
+
+/*Media querys*/
+@media screen and (max-width: 450px) {
+    .logo-twister {
+        width: 180px;
+    }
 }
