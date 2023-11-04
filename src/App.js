@@ -9,6 +9,17 @@ const App = () => {
   const [warningMessage, setWarningMessage] = useState('');
   const [showWarning, setShowWarning] = useState(false);
 
+  // Cargar ideas desde el almacenamiento local al iniciar la aplicación
+  useEffect(() => {
+    const savedIdeas = JSON.parse(localStorage.getItem('ideas')) || [];
+    setIdeas(savedIdeas);
+  }, []); // Este efecto se ejecuta solo una vez al iniciar la aplicación
+
+  // Guardar ideas en el almacenamiento local cada vez que el estado de ideas cambie
+  useEffect(() => {
+    localStorage.setItem('ideas', JSON.stringify(ideas));
+  }, [ideas]); // Este efecto se ejecuta cada vez que el estado 'ideas' cambia
+
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
     setShowWarning(false);
