@@ -9,16 +9,14 @@ const App = () => {
   const [warningMessage, setWarningMessage] = useState('');
   const [showWarning, setShowWarning] = useState(false);
 
-  // Cargar ideas desde el almacenamiento local al iniciar la aplicación
   useEffect(() => {
     const savedIdeas = JSON.parse(localStorage.getItem('ideas')) || [];
     setIdeas(savedIdeas);
-  }, []); // Este efecto se ejecuta solo una vez al iniciar la aplicación
+  }, []); 
 
-  // Guardar ideas en el almacenamiento local cada vez que el estado de ideas cambie
   useEffect(() => {
     localStorage.setItem('ideas', JSON.stringify(ideas));
-  }, [ideas]); // Este efecto se ejecuta cada vez que el estado 'ideas' cambia
+  }, [ideas]); 
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -85,6 +83,7 @@ const App = () => {
 
   return (
     <div className={`App ${isLoading ? 'loading' : ''}`}>
+     <img src="../../logo-twister.svg" alt="Logo" className="logo-twister" />
       {isLoading && <div className="loading-screen">  <video autoPlay loop muted className="background-video">
         <source src="../video.mp4" type="video/mp4" />
       </video> </div>}
