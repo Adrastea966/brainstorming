@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const App = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [ideas, setIdeas] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [warningMessage, setWarningMessage] = useState('');
@@ -10,9 +11,9 @@ const App = () => {
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
-    setShowWarning(false); 
+    setShowWarning(false);
   };
-  
+
   const handleInputKeyDown = (event) => {
     if (event.key === 'Enter') {
       if (inputValue.trim().length === 0) {
@@ -22,12 +23,12 @@ const App = () => {
           setShowWarning(false);
         }, 2000);
       } else {
-        setShowWarning(false); 
+        setShowWarning(false);
         addIdea();
       }
     }
   };
-  
+
   const addIdea = () => {
     if (inputValue.trim().length > 0 && inputValue.trim().length <= 34) {
       const truncatedText = inputValue.trim();
@@ -64,9 +65,18 @@ const App = () => {
     setIdeas(ideas.filter((idea) => idea.selected));
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+      document.body.classList.add('fadeOut');
+    }, 6000);
+  }, []);
+
   return (
-    <div className="App">
-     <img src="../../logo-twister.svg" alt="Logo" className="logo-twister" />
+    <div className={`App ${isLoading ? 'loading' : ''}`}>
+      {isLoading && <div className="loading-screen">  <video autoPlay loop muted className="background-video">
+        <source src="../video.mp4" type="video/mp4" />
+      </video> </div>}
       <div className="idea-container">
         <div className='ideas-input'>
           <input
@@ -99,8 +109,14 @@ const App = () => {
         </div>
         {showWarning && <div className="warning-popup">{warningMessage}</div>}
         <div className='botones-contenedor'>
-          <button className='btn-seleccionar' onClick={selectIdeas}>  <img src="../../image/mano.png" alt="Mano ilustracion" className="btn-seleccionar" /> Seleccionar</button>
-          <button className='btn-borrar-todo' onClick={() => setIdeas([])}> <img src="../../image/goma.png" alt="Goma ilustracion" className="btn-borrar-todo" /> Borrar todo</button>
+          <button className='btn-seleccionar' onClick={selectIdeas}>
+            <img src="../../image/mano.png" alt="Mano ilustracion" className="btn-seleccionar" />
+            Seleccionar
+          </button>
+          <button className='btn-borrar-todo' onClick={() => setIdeas([])}>
+            <img src="../../image/goma.png" alt="Goma ilustracion" className="btn-borrar-todo" />
+            Borrar todo
+          </button>
         </div>
       </div>
     </div>
